@@ -6,101 +6,200 @@
   <title>Belajar Bentuk Geometri</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <script src="/_sdk/b19ec5e9a6bcccbf.editing_sdk.js" integrity="sha512-zBJgQuXCQdyGFqXgZwfp8p9NowwbyuWhOK/NGHf9nps+IMSAyeeSyv3qhtfcnKWA9sWownxUevRqEhsjnjL55w=="></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;family=Nunito:wght@700;800;900&amp;display=swap" rel="stylesheet">
   <style>
-    :root{--ink:#20304a;--muted:#65738b;--blue:#2f80ed;--yellow:#f5be32;--coral:#f06c62;--green:#39a878}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;width:100%;color:var(--ink);font-family:"DM Sans",sans-serif}
-    button{font:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-    button:focus-visible,a:focus-visible{outline:4px solid rgba(47,128,237,.3);outline-offset:3px}
-    .display-font{font-family:"Nunito","DM Sans",sans-serif}
-    .app-shell{
-      width:100%;min-height:calc(100 * min(var(--vh,1vh),1vh));
+    :root {
+      --ink: #20304a;
+      --muted: #65738b;
+      --blue: #2f80ed;
+      --yellow: #f5be32;
+      --coral: #f06c62;
+      --green: #39a878;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      width: 100%;
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+    }
+    button { font: inherit; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, a:focus-visible {
+      outline: 4px solid rgba(47, 128, 237, .3);
+      outline-offset: 3px;
+    }
+    .display-font { font-family: "Nunito", "DM Sans", sans-serif; }
+    .app-shell {
+      width: 100%;
+      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      background-color: #f7fbfd;
       background-image:
-        radial-gradient(circle at 7% 12%,rgba(245,190,50,.18) 0 88px,transparent 89px),
-        radial-gradient(circle at 94% 22%,rgba(47,128,237,.13) 0 120px,transparent 121px),
-        linear-gradient(rgba(47,128,237,.045) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(47,128,237,.045) 1px,transparent 1px);
-      background-size:auto,auto,32px 32px,32px 32px
+        radial-gradient(circle at 7% 12%, rgba(245,190,50,.18) 0 88px, transparent 89px),
+        radial-gradient(circle at 94% 22%, rgba(47,128,237,.13) 0 120px, transparent 121px),
+        linear-gradient(rgba(47,128,237,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47,128,237,.045) 1px, transparent 1px);
+      background-size: auto, auto, 32px 32px, 32px 32px;
     }
-    .soft-shadow{box-shadow:0 15px 45px rgba(38,66,96,.11)}
-    .raised{box-shadow:0 7px 0 rgba(32,48,74,.12);transition:transform .18s ease,box-shadow .18s ease}
-    .raised:active{transform:translateY(3px);box-shadow:0 4px 0 rgba(32,48,74,.12)}
-    .menu-button{transition:background .2s ease,color .2s ease,transform .2s ease}
-    .menu-button:hover{transform:translateY(-1px)}
-    .menu-button.is-active{background:#20304a!important;color:#fff!important;border-color:#20304a!important}
-    .shape-card{position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease;min-width:0}
-    main{min-width:0}
-    [data-template-id]{min-width:0}
-    @media(max-width:640px){
-      .app-shell{overflow-x:hidden}
-      header[data-template-id="header-section"]>div{align-items:flex-start}
-      header[data-template-id="header-section"] nav{width:100%;justify-content:stretch}
-      header[data-template-id="header-section"] nav .menu-button{flex:1;justify-content:center;padding-inline:.7rem;font-size:.875rem}
-      .shape-art{min-height:150px}
-      .shape-art span{transform:scale(.78)}
-      .question-card{padding:1rem}
-      .question-art{min-height:11rem}
-      .quiz-option{min-height:3.5rem;gap:.55rem;padding-inline:.75rem;font-size:.9rem}
-      .option-shape{transform:scale(.82);transform-origin:left center}
-      #question-counter{font-size:.9rem}
+    .soft-shadow { box-shadow: 0 15px 45px rgba(38,66,96,.11); }
+    .raised {
+      box-shadow: 0 7px 0 rgba(32,48,74,.12);
+      transition: transform .18s ease, box-shadow .18s ease;
     }
-    @media(max-width:380px){
-      header[data-template-id="header-section"]>div{padding-inline:.75rem}
-      main{padding-inline:.75rem}
-      .question-card{padding:.75rem}
-      .quiz-option{font-size:.82rem}
-      .option-shape{transform:scale(.72);margin-right:-.25rem}
+    .raised:active {
+      transform: translateY(3px);
+      box-shadow: 0 4px 0 rgba(32,48,74,.12);
     }
-    .shape-card::after{content:"";position:absolute;width:110px;height:110px;right:-45px;top:-45px;border-radius:999px;background:rgba(255,255,255,.34)}
-    .shape-card:hover{transform:translateY(-5px) rotate(-.25deg);box-shadow:0 22px 48px rgba(38,66,96,.15)}
-    .shape-art{min-height:190px;background:radial-gradient(circle at 25% 20%,rgba(255,255,255,.85) 0 7px,transparent 8px),linear-gradient(145deg,rgba(255,255,255,.86),rgba(255,255,255,.38))}
-    .question-card{animation:reveal .35s ease both}
-    @keyframes reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    .question-art{background:radial-gradient(circle at 28% 25%,rgba(255,255,255,.75) 0 8px,transparent 9px),linear-gradient(145deg,#eff8ff,#fff8df)}
-    .quiz-option{display:flex;align-items:center;gap:.85rem;transition:border-color .2s ease,background .2s ease,color .2s ease,transform .2s ease}
-    .quiz-option:hover:not(:disabled){transform:translateY(-2px);border-color:var(--blue);background:#f7fbff}
-    .quiz-option:disabled{cursor:default}
-    .quiz-option.is-correct{background:#e8f8f0;border-color:var(--green);color:#176846}
-    .quiz-option.is-wrong{background:#fff0ee;border-color:var(--coral);color:#993d36}
-    .option-shape{display:inline-block;position:relative;flex:0 0 auto;width:34px;height:34px;filter:drop-shadow(0 3px 2px rgba(32,48,74,.12))}
-    .option-shape.circle{border-radius:999px;background:var(--coral);border:3px solid #fff}
-    .option-shape.square{border-radius:8px;background:var(--blue);border:3px solid #fff}
-    .option-shape.rectangle{width:43px;height:29px;border-radius:8px;background:var(--green);border:3px solid #fff}
-    .option-shape.triangle{width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-bottom:33px solid var(--yellow)}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+    .menu-button { transition: background .2s ease, color .2s ease, transform .2s ease; }
+    .menu-button:hover { transform: translateY(-1px); }
+    .menu-button.is-active {
+      background: #20304a !important;
+      color: #fff !important;
+      border-color: #20304a !important;
+    }
+    .shape-card {
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .shape-card::after {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      right: -45px;
+      top: -45px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.34);
+      pointer-events: none;
+    }
+    .shape-card:hover {
+      transform: translateY(-5px) rotate(-.25deg);
+      box-shadow: 0 22px 48px rgba(38,66,96,.15);
+    }
+    .shape-art {
+      min-height: 190px;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255,255,255,.85) 0 7px, transparent 8px),
+        linear-gradient(145deg, rgba(255,255,255,.86), rgba(255,255,255,.38));
+    }
+    .question-card { animation: reveal .35s ease both; }
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .question-art {
+      background:
+        radial-gradient(circle at 28% 25%, rgba(255,255,255,.75) 0 8px, transparent 9px),
+        linear-gradient(145deg, #eff8ff, #fff8df);
+    }
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .quiz-option:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: var(--blue);
+      background: #f7fbff;
+    }
+    .quiz-option:disabled { cursor: default; }
+    .quiz-option.is-correct {
+      background: #e8f8f0 !important;
+      border-color: var(--green);
+      color: #176846 !important;
+    }
+    .quiz-option.is-wrong {
+      background: #fff0ee !important;
+      border-color: var(--coral);
+      color: #993d36 !important;
+    }
+    .option-shape {
+      display: inline-block;
+      position: relative;
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      filter: drop-shadow(0 3px 2px rgba(32,48,74,.12));
+    }
+    .option-shape.circle {
+      border-radius: 999px;
+      background: var(--coral);
+      border: 3px solid #fff;
+    }
+    .option-shape.square {
+      border-radius: 8px;
+      background: var(--blue);
+      border: 3px solid #fff;
+    }
+    .option-shape.rectangle {
+      width: 43px;
+      height: 29px;
+      border-radius: 8px;
+      background: var(--green);
+      border: 3px solid #fff;
+    }
+    .option-shape.triangle {
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-bottom: 33px solid var(--yellow);
+    }
+    main, [data-template-id] { min-width: 0; }
+    @media (max-width: 640px) {
+      .app-shell { overflow-x: hidden; }
+      header > div { align-items: flex-start; }
+      header nav { width: 100%; }
+      header nav .menu-button { flex: 1; justify-content: center; padding-inline: .7rem; }
+      .shape-art { min-height: 150px; }
+      .shape-art > span { transform: scale(.78); }
+      .question-card { padding: 1rem; }
+      .question-art { min-height: 11rem; }
+      .quiz-option { min-height: 3.5rem; gap: .55rem; padding-inline: .75rem; }
+      .option-shape { transform: scale(.82); transform-origin: left center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
   <script src="/_sdk/e3937a0574eb2d69.data_sdk.js" type="text/javascript" integrity="sha512-xbp/ACqEQy1aDxYMtXTrR3y5MUbzxuggRR/9sD48Gl4VhLMMCiAHsxMaFV6DTdeBpR6ymF+t2zhPKYkWM3+Jfw=="></script>
+  <script src="/_sdk/b19ec5e9a6bcccbf.editing_sdk.js" type="text/javascript" integrity="sha512-zBJgQuXCQdyGFqXgZwfp8p9NowwbyuWhOK/NGHf9nps+IMSAyeeSyv3qhtfcnKWA9sWownxUevRqEhsjnjL55w=="></script>
   <script src="/_sdk/9432170dbd2ae0df.resizing_sdk.js" type="text/javascript" integrity="sha512-FeT+58sb1f9ejWPWFjCbJvTT+SDwGV+ngrHUnlO7TWEOoqwOLj6p256kO3vOL7DIWl1cIgrobiof8v2bOigwPg=="></script>
  </head>
  <body data-template-id="__page-root">
   <div class="app-shell w-full">
    <header data-template-id="header-section" class="canva-header sticky top-0 z-30 border-b border-slate-200/80 bg-white/90 backdrop-blur">
     <div class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-7">
-     <div class="flex items-center gap-3"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-[#f5be32] text-[#20304a] shadow-sm" aria-hidden="true"><i data-lucide="shapes" class="h-7 w-7"></i></span>
+     <div class="flex items-center gap-3"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-[#f5be32] shadow-sm" aria-hidden="true"> <i data-lucide="shapes" class="h-7 w-7"></i> </span>
       <div>
-       <p data-template-id="app-title" class="canva-text display-font font-black"></p>
-       <p data-template-id="app-subtitle" class="canva-text"></p>
+       <p data-template-id="app-title" class="canva-text display-font text-[22px] font-black">Bentuk Ceria</p>
+       <p data-template-id="app-subtitle" class="canva-text text-[13px] text-[#65738b]">Belajar geometri dasar</p>
       </div>
      </div>
-     <nav class="flex flex-wrap items-center gap-2" aria-label="Menu pembelajaran"><button id="learn-menu-button" data-template-id="learn-menu-button" type="button" class="menu-button canva-button is-active inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-slate-200 px-4 py-2 font-extrabold" aria-pressed="true"><i data-lucide="book-open" class="h-5 w-5" aria-hidden="true"></i></button> <button id="quiz-menu-button" data-template-id="quiz-menu-button" type="button" class="menu-button canva-button inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-slate-200 px-4 py-2 font-extrabold" aria-pressed="false"><i data-lucide="pencil-line" class="h-5 w-5" aria-hidden="true"></i></button>
-      <div data-template-id="header-badge" class="canva-tag hidden items-center gap-2 rounded-full px-4 py-2 font-extrabold lg:inline-flex">
-       <i data-lucide="sparkles" class="h-5 w-5" aria-hidden="true"></i>
+     <nav class="flex flex-wrap items-center gap-2" aria-label="Menu pembelajaran"><button id="learn-menu-button" data-template-id="learn-menu-button" type="button" class="menu-button canva-button is-active inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-sm font-extrabold" aria-pressed="true"> <i data-lucide="book-open" class="h-5 w-5" aria-hidden="true"></i> Mengenal Bentuk </button> <button id="quiz-menu-button" data-template-id="quiz-menu-button" type="button" class="menu-button canva-button inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-sm font-extrabold" aria-pressed="false"> <i data-lucide="pencil-line" class="h-5 w-5" aria-hidden="true"></i> Kuis Bentuk </button>
+      <div data-template-id="header-badge" class="canva-tag hidden items-center gap-2 rounded-full bg-[#fff7dc] px-4 py-2 text-sm font-extrabold text-[#795b0a] lg:inline-flex"><i data-lucide="sparkles" class="h-5 w-5" aria-hidden="true"></i> 4 Bentuk · 10 Soal
       </div>
      </nav>
     </div>
    </header>
    <main class="mx-auto w-full max-w-6xl px-4 py-7 sm:px-7 sm:py-10">
     <section id="learn-stage" aria-labelledby="learn-title">
-     <div data-template-id="learn-hero" class="canva-section soft-shadow relative overflow-hidden rounded-[2rem] border border-slate-200 p-6 sm:p-10">
+     <div data-template-id="learn-hero" class="canva-section soft-shadow relative overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-[#eff8ff] to-[#fff8df] p-6 sm:p-10">
       <div class="relative z-10 grid items-center gap-8 lg:grid-cols-[1.2fr_.8fr]">
        <div>
-        <div data-template-id="learn-eyebrow" class="canva-tag mb-4 inline-flex rounded-full px-4 py-2 font-bold"></div>
-        <h1 id="learn-title" data-template-id="learn-title" class="canva-text display-font font-black leading-tight"></h1>
-        <p data-template-id="learn-intro" class="canva-text mt-4 max-w-2xl leading-relaxed"></p>
-        <div class="mt-6 flex flex-wrap gap-3"><a href="#shape-cards" data-template-id="explore-shapes-button" class="canva-button raised inline-flex min-h-14 items-center gap-2 rounded-2xl px-6 py-3 font-extrabold"><i data-lucide="search" class="h-5 w-5" aria-hidden="true"></i></a> <button id="hero-start-quiz" data-template-id="hero-start-quiz" type="button" class="canva-button inline-flex min-h-14 items-center gap-2 rounded-2xl border-2 border-slate-200 px-6 py-3 font-extrabold"><i data-lucide="play" class="h-5 w-5" aria-hidden="true"></i></button>
+        <div data-template-id="learn-eyebrow" class="canva-tag mb-4 inline-flex rounded-full bg-[#e9f8f1] px-4 py-2 text-sm font-bold text-[#176846]">
+         Menu 1 · Mengenal Bentuk
+        </div>
+        <h1 id="learn-title" data-template-id="learn-title" class="canva-text display-font text-[clamp(2.25rem,5vw,2.875rem)] font-black leading-[1.08]">Yuk, kenali bentuk di sekitar kita!</h1>
+        <p data-template-id="learn-intro" class="canva-text mt-4 max-w-2xl leading-relaxed text-[#65738b]">Bentuk geometri ada di mana-mana. Perhatikan sisi dan sudutnya, lalu cari benda yang memiliki bentuk serupa.</p>
+        <div class="mt-6 flex flex-wrap gap-3"><a href="#shape-cards" data-template-id="explore-shapes-button" class="canva-button raised inline-flex min-h-14 items-center gap-2 rounded-2xl bg-[#2f80ed] px-6 py-3 font-extrabold text-white"> <i data-lucide="search" class="h-5 w-5" aria-hidden="true"></i> Lihat Bentuk </a> <button id="hero-start-quiz" data-template-id="hero-start-quiz" type="button" class="canva-button inline-flex min-h-14 items-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-6 py-3 font-extrabold"> <i data-lucide="play" class="h-5 w-5" aria-hidden="true"></i> Langsung ke Kuis </button>
         </div>
        </div>
        <div class="relative mx-auto h-64 w-full max-w-sm" aria-hidden="true"><span class="absolute left-3 top-4 h-28 w-28 rounded-full bg-[#f06c62] shadow-lg"></span> <span class="absolute right-4 top-3 h-28 w-28 rotate-6 rounded-[1.6rem] bg-[#2f80ed] shadow-lg"></span> <span class="absolute bottom-5 left-24" style="width:0;height:0;border-left:70px solid transparent;border-right:70px solid transparent;border-bottom:125px solid #f5be32;filter:drop-shadow(0 12px 9px rgba(32,48,74,.15))"></span> <span class="absolute bottom-2 right-2 h-20 w-36 -rotate-6 rounded-[1.5rem] bg-[#39a878] shadow-lg"></span>
@@ -108,439 +207,310 @@
       </div>
      </div>
      <div class="mb-6 mt-10 max-w-3xl">
-      <p data-template-id="learn-section-label" class="canva-tag mb-3 inline-flex rounded-full px-4 py-2 font-bold"></p>
-      <h2 data-template-id="learn-section-title" class="canva-text display-font font-black"></h2>
-      <p data-template-id="learn-section-copy" class="canva-text mt-3 leading-relaxed"></p>
+      <p data-template-id="learn-section-label" class="canva-tag mb-3 inline-flex rounded-full bg-[#eaf5ff] px-4 py-2 text-sm font-bold text-[#205b9f]">Empat bentuk dasar</p>
+      <h2 data-template-id="learn-section-title" class="canva-text display-font text-[34px] font-black">Amati ciri setiap bentuk</h2>
+      <p data-template-id="learn-section-copy" class="canva-text mt-3 leading-relaxed text-[#65738b]">Setiap bentuk mempunyai ciri khusus. Gunakan ciri itu untuk mengenalinya pada berbagai benda.</p>
      </div>
      <div id="shape-cards" class="grid gap-5 sm:grid-cols-2">
-      <article data-template-id="circle-card" class="shape-card canva-card soft-shadow rounded-[2rem] border border-slate-200 p-5 sm:p-6">
-       <div class="shape-art grid place-items-center rounded-[1.5rem]" aria-hidden="true">
-        <span class="h-32 w-32 rounded-full border-[12px] border-white bg-[#f06c62] shadow-lg"></span>
+      <article data-template-id="circle-card" class="shape-card canva-card soft-shadow rounded-[2rem] border border-slate-200 bg-[#fff0ee] p-5 sm:p-6">
+       <div class="shape-art grid place-items-center rounded-[1.5rem]" aria-hidden="true"><span class="h-32 w-32 rounded-full border-[12px] border-white bg-[#f06c62] shadow-lg"></span>
        </div>
-       <div class="mt-5"><span data-template-id="circle-number" class="canva-tag inline-flex rounded-full px-3 py-1 font-bold"></span>
-        <h3 data-template-id="circle-title" class="canva-text display-font mt-3 font-black"></h3>
-        <p data-template-id="circle-description" class="canva-text mt-2 leading-relaxed"></p>
-        <p data-template-id="circle-examples" class="canva-text mt-3 rounded-xl bg-white/70 px-3 py-2 font-bold"></p>
-       </div>
-      </article>
-      <article data-template-id="square-card" class="shape-card canva-card soft-shadow rounded-[2rem] border border-slate-200 p-5 sm:p-6">
-       <div class="shape-art grid place-items-center rounded-[1.5rem]" aria-hidden="true">
-        <span class="h-32 w-32 rotate-3 rounded-[1.25rem] border-[12px] border-white bg-[#2f80ed] shadow-lg"></span>
-       </div>
-       <div class="mt-5"><span data-template-id="square-number" class="canva-tag inline-flex rounded-full px-3 py-1 font-bold"></span>
-        <h3 data-template-id="square-title" class="canva-text display-font mt-3 font-black"></h3>
-        <p data-template-id="square-description" class="canva-text mt-2 leading-relaxed"></p>
-        <p data-template-id="square-examples" class="canva-text mt-3 rounded-xl bg-white/70 px-3 py-2 font-bold"></p>
+       <div class="mt-5"><span data-template-id="circle-number" class="canva-tag inline-flex rounded-full bg-white px-3 py-1 text-[13px] font-bold text-[#993d36]">Bentuk 1</span>
+        <h3 data-template-id="circle-title" class="canva-text display-font mt-3 text-[28px] font-black">Lingkaran</h3>
+        <p data-template-id="circle-description" class="canva-text mt-2 leading-relaxed text-[#526179]">Lingkaran berbentuk bulat, tidak memiliki sisi lurus, dan tidak mempunyai sudut.</p>
+        <p data-template-id="circle-examples" class="canva-text mt-3 rounded-xl bg-white/70 px-3 py-2 text-[15px] font-bold text-[#993d36]">Contoh: jam dinding, piring, dan roda.</p>
        </div>
       </article>
-      <article data-template-id="triangle-card" class="shape-card canva-card soft-shadow rounded-[2rem] border border-slate-200 p-5 sm:p-6">
-       <div class="shape-art grid place-items-center rounded-[1.5rem]" aria-hidden="true">
-        <span style="width:0;height:0;border-left:75px solid transparent;border-right:75px solid transparent;border-bottom:135px solid #f5be32;filter:drop-shadow(0 12px 8px rgba(32,48,74,.18))"></span>
+      <article data-template-id="square-card" class="shape-card canva-card soft-shadow rounded-[2rem] border border-slate-200 bg-[#eaf5ff] p-5 sm:p-6">
+       <div class="shape-art grid place-items-center rounded-[1.5rem]" aria-hidden="true"><span class="h-32 w-32 rotate-3 rounded-[1.25rem] border-[12px] border-white bg-[#2f80ed] shadow-lg"></span>
        </div>
-       <div class="mt-5"><span data-template-id="triangle-number" class="canva-tag inline-flex rounded-full px-3 py-1 font-bold"></span>
-        <h3 data-template-id="triangle-title" class="canva-text display-font mt-3 font-black"></h3>
-        <p data-template-id="triangle-description" class="canva-text mt-2 leading-relaxed"></p>
-        <p data-template-id="triangle-examples" class="canva-text mt-3 rounded-xl bg-white/70 px-3 py-2 font-bold"></p>
+       <div class="mt-5"><span data-template-id="square-number" class="canva-tag inline-flex rounded-full bg-white px-3 py-1 text-[13px] font-bold text-[#205b9f]">Bentuk 2</span>
+        <h3 data-template-id="square-title" class="canva-text display-font mt-3 text-[28px] font-black">Persegi</h3>
+        <p data-template-id="square-description" class="canva-text mt-2 leading-relaxed text-[#526179]">Persegi memiliki empat sisi yang sama panjang dan empat sudut.</p>
+        <p data-template-id="square-examples" class="canva-text mt-3 rounded-xl bg-white/70 px-3 py-2 text-[15px] font-bold text-[#205b9f]">Contoh: ubin, papan catur, dan jendela.</p>
        </div>
       </article>
-      <article data-template-id="rectangle-card" class="shape-card canva-card soft-shadow rounded-[2rem] border border-slate-200 p-5 sm:p-6">
-       <div class="shape-art grid place-items-center rounded-[1.5rem]" aria-hidden="true">
-        <span class="h-24 w-40 -rotate-3 rounded-[1.25rem] border-[12px] border-white bg-[#39a878] shadow-lg"></span>
+      <article data-template-id="triangle-card" class="shape-card canva-card soft-shadow rounded-[2rem] border border-slate-200 bg-[#fff7dc] p-5 sm:p-6">
+       <div class="shape-art grid place-items-center rounded-[1.5rem]" aria-hidden="true"><span style="width:0;height:0;border-left:75px solid transparent;border-right:75px solid transparent;border-bottom:135px solid #f5be32;filter:drop-shadow(0 12px 8px rgba(32,48,74,.18))"></span>
        </div>
-       <div class="mt-5"><span data-template-id="rectangle-number" class="canva-tag inline-flex rounded-full px-3 py-1 font-bold"></span>
-        <h3 data-template-id="rectangle-title" class="canva-text display-font mt-3 font-black"></h3>
-        <p data-template-id="rectangle-description" class="canva-text mt-2 leading-relaxed"></p>
-        <p data-template-id="rectangle-examples" class="canva-text mt-3 rounded-xl bg-white/70 px-3 py-2 font-bold"></p>
+       <div class="mt-5"><span data-template-id="triangle-number" class="canva-tag inline-flex rounded-full bg-white px-3 py-1 text-[13px] font-bold text-[#795b0a]">Bentuk 3</span>
+        <h3 data-template-id="triangle-title" class="canva-text display-font mt-3 text-[28px] font-black">Segitiga</h3>
+        <p data-template-id="triangle-description" class="canva-text mt-2 leading-relaxed text-[#526179]">Segitiga memiliki tiga sisi dan tiga sudut. Ukuran sisinya dapat berbeda.</p>
+        <p data-template-id="triangle-examples" class="canva-text mt-3 rounded-xl bg-white/70 px-3 py-2 text-[15px] font-bold text-[#795b0a]">Contoh: atap rumah, rambu, dan potongan pizza.</p>
+       </div>
+      </article>
+      <article data-template-id="rectangle-card" class="shape-card canva-card soft-shadow rounded-[2rem] border border-slate-200 bg-[#e9f8f1] p-5 sm:p-6">
+       <div class="shape-art grid place-items-center rounded-[1.5rem]" aria-hidden="true"><span class="h-24 w-40 -rotate-3 rounded-[1.25rem] border-[12px] border-white bg-[#39a878] shadow-lg"></span>
+       </div>
+       <div class="mt-5"><span data-template-id="rectangle-number" class="canva-tag inline-flex rounded-full bg-white px-3 py-1 text-[13px] font-bold text-[#176846]">Bentuk 4</span>
+        <h3 data-template-id="rectangle-title" class="canva-text display-font mt-3 text-[28px] font-black">Persegi Panjang</h3>
+        <p data-template-id="rectangle-description" class="canva-text mt-2 leading-relaxed text-[#526179]">Persegi panjang memiliki empat sisi dan empat sudut. Sisi yang berhadapan sama panjang.</p>
+        <p data-template-id="rectangle-examples" class="canva-text mt-3 rounded-xl bg-white/70 px-3 py-2 text-[15px] font-bold text-[#176846]">Contoh: pintu, buku, dan layar televisi.</p>
        </div>
       </article>
      </div>
-     <div data-template-id="learn-cta-panel" class="canva-panel mt-8 flex flex-col items-start justify-between gap-5 rounded-[2rem] border border-slate-200 p-6 sm:flex-row sm:items-center sm:p-8">
+     <div data-template-id="learn-cta-panel" class="canva-panel mt-8 flex flex-col items-start justify-between gap-5 rounded-[2rem] border border-slate-200 bg-gradient-to-br from-[#20304a] to-[#31547c] p-6 sm:flex-row sm:items-center sm:p-8">
       <div>
-       <h2 data-template-id="learn-cta-title" class="canva-text display-font font-black"></h2>
-       <p data-template-id="learn-cta-copy" class="canva-text mt-2"></p>
-      </div><button id="start-quiz" data-template-id="start-quiz" type="button" class="canva-button raised inline-flex min-h-14 shrink-0 items-center gap-2 rounded-2xl px-7 py-3 font-extrabold"><i data-lucide="arrow-right" class="h-5 w-5" aria-hidden="true"></i></button>
+       <h2 data-template-id="learn-cta-title" class="canva-text display-font text-[28px] font-black text-white">Sudah mengenal keempat bentuk?</h2>
+       <p data-template-id="learn-cta-copy" class="canva-text mt-2 text-[#dbe8f6]">Sekarang uji kemampuanmu melalui sepuluh soal bergambar.</p>
+      </div><button id="start-quiz" data-template-id="start-quiz" type="button" class="canva-button raised inline-flex min-h-14 shrink-0 items-center gap-2 rounded-2xl bg-[#f5be32] px-7 py-3 font-extrabold"> Mulai Kuis <i data-lucide="arrow-right" class="h-5 w-5" aria-hidden="true"></i> </button>
      </div>
     </section>
     <section id="quiz-stage" class="hidden" aria-labelledby="quiz-title">
      <div class="mb-7 grid items-end gap-6 lg:grid-cols-[1fr_auto]">
       <div class="max-w-3xl">
-       <div data-template-id="quiz-eyebrow" class="canva-tag mb-3 inline-flex rounded-full px-4 py-2 font-bold"></div>
-       <h1 id="quiz-title" data-template-id="quiz-title" class="canva-text display-font font-black leading-tight"></h1>
-       <p data-template-id="quiz-intro" class="canva-text mt-3 max-w-2xl leading-relaxed"></p>
+       <div data-template-id="quiz-eyebrow" class="canva-tag mb-3 inline-flex rounded-full bg-[#e9f8f1] px-4 py-2 text-sm font-bold text-[#176846]">
+        Menu 2 · Ayo bermain
+       </div>
+       <h1 id="quiz-title" data-template-id="quiz-title" class="canva-text display-font text-[clamp(2.2rem,5vw,2.75rem)] font-black leading-tight">Kuis mengenal bentuk</h1>
+       <p data-template-id="quiz-intro" class="canva-text mt-3 max-w-2xl leading-relaxed text-[#65738b]">Amati setiap gambar, lalu pilih nama bentuk yang paling tepat. Jawab sepuluh soal untuk melihat skormu.</p>
       </div>
-      <aside data-template-id="shape-key" class="canva-panel rounded-[1.5rem] border border-slate-200 p-4" aria-label="Bentuk yang diuji">
-       <p data-template-id="shape-key-label" class="canva-text mb-3 font-extrabold"></p>
+      <aside data-template-id="shape-key" class="canva-panel rounded-[1.5rem] border border-slate-200 bg-white p-4" aria-label="Bentuk yang diuji">
+       <p data-template-id="shape-key-label" class="canva-text mb-3 text-sm font-extrabold">Bentuk yang akan muncul</p>
        <div class="flex items-center gap-3" aria-hidden="true"><span class="h-8 w-8 rounded-full bg-[#f06c62]"></span> <span class="h-8 w-8 rounded-lg bg-[#2f80ed]"></span> <span style="width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-bottom:32px solid #f5be32"></span> <span class="h-7 w-11 rounded-lg bg-[#39a878]"></span>
        </div>
       </aside>
      </div>
      <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
-      <p id="question-counter" class="font-extrabold text-[#20304a]" aria-live="polite">Soal 1 dari 10</p><span data-template-id="answer-hint" class="canva-tag rounded-full px-4 py-2 font-bold"></span>
+      <p id="question-counter" class="font-extrabold" aria-live="polite">Soal 1 dari 10</p><span data-template-id="answer-hint" class="canva-tag rounded-full bg-[#eaf5ff] px-4 py-2 text-sm font-bold text-[#205b9f]">Pilih satu jawaban</span>
      </div>
      <div class="mb-6 h-3 overflow-hidden rounded-full bg-white shadow-inner" role="progressbar" aria-label="Kemajuan kuis" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1">
       <div id="quiz-progress" class="h-full rounded-full bg-[#2f80ed] transition-all duration-300" style="width:10%"></div>
      </div>
-     <div id="questions-holder">
-      <article class="question-card soft-shadow rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8" data-question-index="0" data-correct="Lingkaran" aria-labelledby="question-1-heading">
-       <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
-        <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">
-         <div class="relative h-40 w-40 rounded-full border-[14px] border-[#2f80ed] bg-white shadow-lg" role="img" aria-label="Jam dinding berbentuk lingkaran">
-          <span class="absolute left-1/2 top-1/2 h-12 w-1 -translate-x-1/2 -translate-y-full rounded-full bg-[#20304a]"></span><span class="absolute left-1/2 top-1/2 h-1 w-10 -translate-y-1/2 rounded-full bg-[#20304a]"></span><span class="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f06c62]"></span>
-         </div>
-        </div>
-        <div>
-         <p data-template-id="question-1-label" class="canva-text font-bold uppercase tracking-widest"></p>
-         <h2 id="question-1-heading" data-template-id="question-1-text" class="canva-text display-font mt-2 break-words font-black"></h2>
-         <div class="mt-5 grid min-w-0 gap-3 sm:grid-cols-2"><button data-template-id="q1-option-circle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Lingkaran"><span class="option-shape circle" aria-hidden="true"></span><span class="option-label">Lingkaran</span></button> <button data-template-id="q1-option-square" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi"><span class="option-shape square" aria-hidden="true"></span><span class="option-label">Persegi</span></button> <button data-template-id="q1-option-triangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Segitiga"><span class="option-shape triangle" aria-hidden="true"></span><span class="option-label">Segitiga</span></button> <button data-template-id="q1-option-rectangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi Panjang"><span class="option-shape rectangle" aria-hidden="true"></span><span class="option-label">Persegi Panjang</span></button>
-         </div>
-         <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
-          <span data-template-id="correct-feedback-1" class="correct-message canva-text hidden"></span><span data-template-id="wrong-feedback-1" class="wrong-message canva-text hidden"></span>
-         </div>
-        </div>
-       </div>
-      </article>
-      <article class="question-card soft-shadow hidden rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8" data-question-index="1" data-correct="Persegi" aria-labelledby="question-2-heading">
-       <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
-        <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">
-         <div class="grid h-40 w-40 grid-cols-2 gap-1 rounded-xl border-[10px] border-[#8b5e3c] bg-[#d9f2ff] p-2 shadow-lg" role="img" aria-label="Jendela berbentuk persegi">
-          <span class="bg-white/60"></span><span class="bg-white/60"></span><span class="bg-white/60"></span><span class="bg-white/60"></span>
-         </div>
-        </div>
-        <div>
-         <p data-template-id="question-2-label" class="canva-text font-bold uppercase tracking-widest"></p>
-         <h2 id="question-2-heading" data-template-id="question-2-text" class="canva-text display-font mt-2 font-black"></h2>
-         <div class="mt-5 grid min-w-0 gap-3 sm:grid-cols-2"><button data-template-id="q2-option-circle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Lingkaran"><span class="option-shape circle" aria-hidden="true"></span><span class="option-label">Lingkaran</span></button> <button data-template-id="q2-option-square" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi"><span class="option-shape square" aria-hidden="true"></span><span class="option-label">Persegi</span></button> <button data-template-id="q2-option-triangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Segitiga"><span class="option-shape triangle" aria-hidden="true"></span><span class="option-label">Segitiga</span></button> <button data-template-id="q2-option-rectangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi Panjang"><span class="option-shape rectangle" aria-hidden="true"></span><span class="option-label">Persegi Panjang</span></button>
-         </div>
-         <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
-          <span data-template-id="correct-feedback-2" class="correct-message canva-text hidden"></span><span data-template-id="wrong-feedback-2" class="wrong-message canva-text hidden"></span>
-         </div>
-        </div>
-       </div>
-      </article>
-      <article class="question-card soft-shadow hidden rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8" data-question-index="2" data-correct="Segitiga" aria-labelledby="question-3-heading">
-       <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
-        <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">
-         <div class="relative h-44 w-48" role="img" aria-label="Potongan pizza berbentuk segitiga">
-          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[18deg]">
-           <div style="width:0;height:0;border-left:76px solid transparent;border-right:76px solid transparent;border-bottom:140px solid #f5be32"></div><span class="absolute left-5 top-16 h-5 w-5 rounded-full bg-[#f06c62]"></span><span class="absolute right-6 top-20 h-5 w-5 rounded-full bg-[#f06c62]"></span><span class="absolute left-1/2 top-28 h-5 w-5 -translate-x-1/2 rounded-full bg-[#39a878]"></span>
-          </div>
-         </div>
-        </div>
-        <div>
-         <p data-template-id="question-3-label" class="canva-text font-bold uppercase tracking-widest"></p>
-         <h2 id="question-3-heading" data-template-id="question-3-text" class="canva-text display-font mt-2 font-black"></h2>
-         <div class="mt-5 grid gap-3 sm:grid-cols-2"><button data-template-id="q3-option-circle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Lingkaran"><span class="option-shape circle" aria-hidden="true"></span></button> <button data-template-id="q3-option-square" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi"><span class="option-shape square" aria-hidden="true"></span></button> <button data-template-id="q3-option-triangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Segitiga"><span class="option-shape triangle" aria-hidden="true"></span></button> <button data-template-id="q3-option-rectangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi Panjang"><span class="option-shape rectangle" aria-hidden="true"></span></button>
-         </div>
-         <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
-          <span data-template-id="correct-feedback-3" class="correct-message canva-text hidden"></span><span data-template-id="wrong-feedback-3" class="wrong-message canva-text hidden"></span>
-         </div>
-        </div>
-       </div>
-      </article>
-      <article class="question-card soft-shadow hidden rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8" data-question-index="3" data-correct="Persegi Panjang" aria-labelledby="question-4-heading">
-       <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
-        <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">
-         <div class="relative h-44 w-32 rounded-t-[4rem] rounded-b-lg border-[10px] border-[#8b5e3c] bg-[#39a878] shadow-lg" role="img" aria-label="Pintu berbentuk persegi panjang">
-          <span class="absolute right-3 top-1/2 h-4 w-4 rounded-full bg-[#f5be32]"></span>
-         </div>
-        </div>
-        <div>
-         <p data-template-id="question-4-label" class="canva-text font-bold uppercase tracking-widest"></p>
-         <h2 id="question-4-heading" data-template-id="question-4-text" class="canva-text display-font mt-2 font-black"></h2>
-         <div class="mt-5 grid gap-3 sm:grid-cols-2"><button data-template-id="q4-option-circle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Lingkaran"><span class="option-shape circle" aria-hidden="true"></span></button> <button data-template-id="q4-option-square" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi"><span class="option-shape square" aria-hidden="true"></span></button> <button data-template-id="q4-option-triangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Segitiga"><span class="option-shape triangle" aria-hidden="true"></span></button> <button data-template-id="q4-option-rectangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi Panjang"><span class="option-shape rectangle" aria-hidden="true"></span></button>
-         </div>
-         <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
-          <span data-template-id="correct-feedback-4" class="correct-message canva-text hidden"></span><span data-template-id="wrong-feedback-4" class="wrong-message canva-text hidden"></span>
-         </div>
-        </div>
-       </div>
-      </article>
-      <article class="question-card soft-shadow hidden rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8" data-question-index="4" data-correct="Lingkaran" aria-labelledby="question-5-heading">
-       <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
-        <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">
-         <div class="relative h-40 w-40 rounded-full bg-[#f06c62] shadow-lg" role="img" aria-label="Bola berbentuk lingkaran">
-          <span class="absolute left-1/2 top-0 h-full w-12 -translate-x-1/2 rounded-[50%] border-x-4 border-white/70"></span><span class="absolute left-0 top-1/2 h-12 w-full -translate-y-1/2 rounded-[50%] border-y-4 border-white/70"></span>
-         </div>
-        </div>
-        <div>
-         <p data-template-id="question-5-label" class="canva-text font-bold uppercase tracking-widest"></p>
-         <h2 id="question-5-heading" data-template-id="question-5-text" class="canva-text display-font mt-2 font-black"></h2>
-         <div class="mt-5 grid gap-3 sm:grid-cols-2"><button data-template-id="q5-option-circle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Lingkaran"><span class="option-shape circle" aria-hidden="true"></span></button> <button data-template-id="q5-option-square" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi"><span class="option-shape square" aria-hidden="true"></span></button> <button data-template-id="q5-option-triangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Segitiga"><span class="option-shape triangle" aria-hidden="true"></span></button> <button data-template-id="q5-option-rectangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi Panjang"><span class="option-shape rectangle" aria-hidden="true"></span></button>
-         </div>
-         <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
-          <span data-template-id="correct-feedback-5" class="correct-message canva-text hidden"></span><span data-template-id="wrong-feedback-5" class="wrong-message canva-text hidden"></span>
-         </div>
-        </div>
-       </div>
-      </article>
-      <article class="question-card soft-shadow hidden rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8" data-question-index="5" data-correct="Segitiga" aria-labelledby="question-6-heading">
-       <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
-        <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">
-         <div class="relative h-40 w-44" role="img" aria-label="Atap rumah berbentuk segitiga">
-          <div class="absolute left-1/2 top-0 -translate-x-1/2" style="width:0;height:0;border-left:86px solid transparent;border-right:86px solid transparent;border-bottom:92px solid #f06c62"></div>
-          <div class="absolute bottom-0 left-5 h-24 w-36 rounded-b-xl border-4 border-[#2f80ed] bg-white"></div>
-          <div class="absolute bottom-0 left-1/2 h-16 w-9 -translate-x-1/2 rounded-t-lg bg-[#f5be32]"></div>
-         </div>
-        </div>
-        <div>
-         <p data-template-id="question-6-label" class="canva-text font-bold uppercase tracking-widest"></p>
-         <h2 id="question-6-heading" data-template-id="question-6-text" class="canva-text display-font mt-2 font-black"></h2>
-         <div class="mt-5 grid gap-3 sm:grid-cols-2"><button data-template-id="q6-option-circle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Lingkaran"><span class="option-shape circle" aria-hidden="true"></span></button> <button data-template-id="q6-option-square" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi"><span class="option-shape square" aria-hidden="true"></span></button> <button data-template-id="q6-option-triangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Segitiga"><span class="option-shape triangle" aria-hidden="true"></span></button> <button data-template-id="q6-option-rectangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi Panjang"><span class="option-shape rectangle" aria-hidden="true"></span></button>
-         </div>
-         <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
-          <span data-template-id="correct-feedback-6" class="correct-message canva-text hidden"></span><span data-template-id="wrong-feedback-6" class="wrong-message canva-text hidden"></span>
-         </div>
-        </div>
-       </div>
-      </article>
-      <article class="question-card soft-shadow hidden rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8" data-question-index="6" data-correct="Persegi Panjang" aria-labelledby="question-7-heading">
-       <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
-        <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">
-         <div class="relative h-28 w-48 rotate-[-4deg] rounded-xl border-[9px] border-[#20304a] bg-[#bfe7ff] shadow-lg" role="img" aria-label="Layar televisi berbentuk persegi panjang"><span class="absolute -bottom-7 left-1/2 h-7 w-4 -translate-x-1/2 bg-[#20304a]"></span> <span class="absolute -bottom-8 left-1/2 h-3 w-20 -translate-x-1/2 rounded-full bg-[#20304a]"></span> <span class="absolute left-5 top-5 h-3 w-20 rotate-[-18deg] rounded-full bg-white/60"></span>
-         </div>
-        </div>
-        <div>
-         <p data-template-id="question-7-label" class="canva-text font-bold uppercase tracking-widest"></p>
-         <h2 id="question-7-heading" data-template-id="question-7-text" class="canva-text display-font mt-2 font-black"></h2>
-         <div class="mt-5 grid gap-3 sm:grid-cols-2"><button data-template-id="q7-option-circle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Lingkaran"><span class="option-shape circle" aria-hidden="true"></span></button> <button data-template-id="q7-option-square" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi"><span class="option-shape square" aria-hidden="true"></span></button> <button data-template-id="q7-option-triangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Segitiga"><span class="option-shape triangle" aria-hidden="true"></span></button> <button data-template-id="q7-option-rectangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi Panjang"><span class="option-shape rectangle" aria-hidden="true"></span></button>
-         </div>
-         <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
-          <span data-template-id="correct-feedback-7" class="correct-message canva-text hidden"></span><span data-template-id="wrong-feedback-7" class="wrong-message canva-text hidden"></span>
-         </div>
-        </div>
-       </div>
-      </article>
-      <article class="question-card soft-shadow hidden rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8" data-question-index="7" data-correct="Persegi" aria-labelledby="question-8-heading">
-       <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
-        <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">
-         <div class="grid h-40 w-40 rotate-3 grid-cols-4 grid-rows-4 overflow-hidden rounded-xl border-[8px] border-white shadow-lg" role="img" aria-label="Papan permainan berbentuk persegi"><span class="bg-[#20304a]"></span><span class="bg-[#f5be32]"></span><span class="bg-[#20304a]"></span><span class="bg-[#f5be32]"></span> <span class="bg-[#f5be32]"></span><span class="bg-[#20304a]"></span><span class="bg-[#f5be32]"></span><span class="bg-[#20304a]"></span> <span class="bg-[#20304a]"></span><span class="bg-[#f5be32]"></span><span class="bg-[#20304a]"></span><span class="bg-[#f5be32]"></span> <span class="bg-[#f5be32]"></span><span class="bg-[#20304a]"></span><span class="bg-[#f5be32]"></span><span class="bg-[#20304a]"></span>
-         </div>
-        </div>
-        <div>
-         <p data-template-id="question-8-label" class="canva-text font-bold uppercase tracking-widest"></p>
-         <h2 id="question-8-heading" data-template-id="question-8-text" class="canva-text display-font mt-2 font-black"></h2>
-         <div class="mt-5 grid gap-3 sm:grid-cols-2"><button data-template-id="q8-option-circle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Lingkaran"><span class="option-shape circle" aria-hidden="true"></span></button> <button data-template-id="q8-option-square" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi"><span class="option-shape square" aria-hidden="true"></span></button> <button data-template-id="q8-option-triangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Segitiga"><span class="option-shape triangle" aria-hidden="true"></span></button> <button data-template-id="q8-option-rectangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi Panjang"><span class="option-shape rectangle" aria-hidden="true"></span></button>
-         </div>
-         <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
-          <span data-template-id="correct-feedback-8" class="correct-message canva-text hidden"></span><span data-template-id="wrong-feedback-8" class="wrong-message canva-text hidden"></span>
-         </div>
-        </div>
-       </div>
-      </article>
-      <article class="question-card soft-shadow hidden rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8" data-question-index="8" data-correct="Lingkaran" aria-labelledby="question-9-heading">
-       <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
-        <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">
-         <div class="relative h-40 w-40 rounded-full border-[12px] border-white bg-[#2f80ed] shadow-lg" role="img" aria-label="Roda sepeda berbentuk lingkaran"><span class="absolute inset-4 rounded-full border-4 border-[#dcecff]"></span> <span class="absolute left-1/2 top-1/2 h-[4px] w-28 -translate-x-1/2 -translate-y-1/2 bg-white"></span> <span class="absolute left-1/2 top-1/2 h-28 w-[4px] -translate-x-1/2 -translate-y-1/2 bg-white"></span> <span class="absolute left-1/2 top-1/2 h-[4px] w-28 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white"></span> <span class="absolute left-1/2 top-1/2 h-[4px] w-28 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white"></span> <span class="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f5be32]"></span>
-         </div>
-        </div>
-        <div>
-         <p data-template-id="question-9-label" class="canva-text font-bold uppercase tracking-widest"></p>
-         <h2 id="question-9-heading" data-template-id="question-9-text" class="canva-text display-font mt-2 font-black"></h2>
-         <div class="mt-5 grid gap-3 sm:grid-cols-2"><button data-template-id="q9-option-circle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Lingkaran"><span class="option-shape circle" aria-hidden="true"></span></button> <button data-template-id="q9-option-square" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi"><span class="option-shape square" aria-hidden="true"></span></button> <button data-template-id="q9-option-triangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Segitiga"><span class="option-shape triangle" aria-hidden="true"></span></button> <button data-template-id="q9-option-rectangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi Panjang"><span class="option-shape rectangle" aria-hidden="true"></span></button>
-         </div>
-         <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
-          <span data-template-id="correct-feedback-9" class="correct-message canva-text hidden"></span><span data-template-id="wrong-feedback-9" class="wrong-message canva-text hidden"></span>
-         </div>
-        </div>
-       </div>
-      </article>
-      <article class="question-card soft-shadow hidden rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8" data-question-index="9" data-correct="Segitiga" aria-labelledby="question-10-heading">
-       <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
-        <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">
-         <div class="relative h-48 w-48" role="img" aria-label="Rambu lalu lintas berbentuk segitiga">
-          <div class="absolute left-1/2 top-2 -translate-x-1/2" style="width:0;height:0;border-left:86px solid transparent;border-right:86px solid transparent;border-bottom:152px solid #f06c62;filter:drop-shadow(0 12px 8px rgba(32,48,74,.18))"></div>
-          <div class="absolute left-1/2 top-[32px] -translate-x-1/2" style="width:0;height:0;border-left:62px solid transparent;border-right:62px solid transparent;border-bottom:110px solid white"></div><span class="absolute left-1/2 top-[78px] h-10 w-3 -translate-x-1/2 rounded-full bg-[#20304a]"></span> <span class="absolute left-1/2 top-[124px] h-3 w-3 -translate-x-1/2 rounded-full bg-[#20304a]"></span>
-         </div>
-        </div>
-        <div>
-         <p data-template-id="question-10-label" class="canva-text font-bold uppercase tracking-widest"></p>
-         <h2 id="question-10-heading" data-template-id="question-10-text" class="canva-text display-font mt-2 font-black"></h2>
-         <div class="mt-5 grid gap-3 sm:grid-cols-2"><button data-template-id="q10-option-circle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Lingkaran"><span class="option-shape circle" aria-hidden="true"></span></button> <button data-template-id="q10-option-square" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi"><span class="option-shape square" aria-hidden="true"></span></button> <button data-template-id="q10-option-triangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Segitiga"><span class="option-shape triangle" aria-hidden="true"></span></button> <button data-template-id="q10-option-rectangle" type="button" class="quiz-option canva-button min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="Persegi Panjang"><span class="option-shape rectangle" aria-hidden="true"></span></button>
-         </div>
-         <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
-          <span data-template-id="correct-feedback-10" class="correct-message canva-text hidden"></span><span data-template-id="wrong-feedback-10" class="wrong-message canva-text hidden"></span>
-         </div>
-        </div>
-       </div>
-      </article>
-     </div>
-     <div class="mt-6 flex justify-end"><button id="next-question" data-template-id="next-question" type="button" class="canva-button raised hidden min-h-14 items-center gap-2 rounded-2xl px-6 py-3 font-extrabold"><i data-lucide="arrow-right" class="h-5 w-5" aria-hidden="true"></i></button> <button id="finish-quiz" data-template-id="finish-quiz" type="button" class="canva-button raised hidden min-h-14 items-center gap-2 rounded-2xl px-6 py-3 font-extrabold"><i data-lucide="check-circle" class="h-5 w-5" aria-hidden="true"></i></button>
+     <div id="questions-holder"></div>
+     <div class="mt-6 flex justify-end"><button id="next-question" data-template-id="next-question" type="button" class="canva-button raised hidden min-h-14 items-center gap-2 rounded-2xl bg-[#2f80ed] px-6 py-3 font-extrabold text-white"> Soal Berikutnya <i data-lucide="arrow-right" class="h-5 w-5" aria-hidden="true"></i> </button> <button id="finish-quiz" data-template-id="finish-quiz" type="button" class="canva-button raised hidden min-h-14 items-center gap-2 rounded-2xl bg-[#39a878] px-6 py-3 font-extrabold text-white"> Lihat Hasil <i data-lucide="check-circle" class="h-5 w-5" aria-hidden="true"></i> </button>
      </div>
     </section>
     <section id="result-stage" class="hidden" aria-labelledby="result-title">
      <div class="soft-shadow mx-auto max-w-3xl rounded-[2rem] border border-slate-200 bg-white p-6 text-center sm:p-10">
-      <div class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-[#e9f8f1] text-[#39a878]">
-       <i data-lucide="award" class="h-11 w-11" aria-hidden="true"></i>
+      <div class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-[#e9f8f1] text-[#39a878]"><i data-lucide="award" class="h-11 w-11" aria-hidden="true"></i>
       </div>
-      <p data-template-id="result-kicker" class="canva-text mt-5 font-bold uppercase tracking-widest"></p>
-      <h1 id="result-title" data-template-id="result-title" class="canva-text display-font mt-2 font-black"></h1>
+      <p data-template-id="result-kicker" class="canva-text mt-5 text-[13px] font-bold uppercase tracking-widest text-[#176846]">Kuis selesai</p>
+      <h1 id="result-title" data-template-id="result-title" class="canva-text display-font mt-2 text-[38px] font-black">Kerja bagus!</h1>
       <div id="result-score" class="display-font my-5 text-6xl font-black text-[#2f80ed]" aria-live="polite">
        0
       </div>
-      <p id="result-summary" class="text-xl font-extrabold text-[#20304a]"></p>
-      <p data-template-id="result-message" class="canva-text mx-auto mt-3 max-w-xl leading-relaxed"></p>
-      <div class="mt-7 flex flex-wrap justify-center gap-3"><button id="retry-quiz" data-template-id="retry-quiz" type="button" class="canva-button raised inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl px-7 py-3 font-extrabold"><i data-lucide="rotate-ccw" class="h-5 w-5" aria-hidden="true"></i></button> <button id="back-to-learn" data-template-id="back-to-learn" type="button" class="canva-button inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-7 py-3 font-extrabold"><i data-lucide="book-open" class="h-5 w-5" aria-hidden="true"></i></button>
+      <p id="result-summary" class="text-xl font-extrabold"></p>
+      <p data-template-id="result-message" class="canva-text mx-auto mt-3 max-w-xl leading-relaxed text-[#65738b]">Setiap usaha adalah kemajuan. Pelajari kembali ciri bentuk atau ulangi kuis agar semakin mahir.</p>
+      <div class="mt-7 flex flex-wrap justify-center gap-3"><button id="retry-quiz" data-template-id="retry-quiz" type="button" class="canva-button raised inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-[#2f80ed] px-7 py-3 font-extrabold text-white"> <i data-lucide="rotate-ccw" class="h-5 w-5" aria-hidden="true"></i> Ulangi Kuis </button> <button id="back-to-learn" data-template-id="back-to-learn" type="button" class="canva-button inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-7 py-3 font-extrabold"> <i data-lucide="book-open" class="h-5 w-5" aria-hidden="true"></i> Kembali ke Materi </button>
       </div>
      </div>
     </section>
    </main>
    <footer data-template-id="footer-section" class="canva-footer mt-8 border-t border-slate-200 bg-white/80">
     <div class="mx-auto w-full max-w-6xl px-4 py-6 text-center sm:px-7">
-     <p data-template-id="footer-title" class="canva-text font-extrabold"></p>
-     <p data-template-id="footer-copy" class="canva-text mt-1"></p>
+     <p data-template-id="footer-title" class="canva-text font-extrabold">Bentuk Ceria · Belajar Geometri</p>
+     <p data-template-id="footer-copy" class="canva-text mt-1 text-sm text-[#65738b]">Amati bentuk-bentuk di sekitarmu dan temukan contoh baru setiap hari.</p>
     </div>
    </footer>
   </div>
   <script>
-  const TOTAL_QUESTIONS = 10;
-  let questionIndex = 0;
-  let correctAnswers = 0;
-  let answered = false;
+    const QUESTIONS = [
+      { object: "Jam dinding", answer: "Lingkaran", art: "clock", label: "Jam dinding berbentuk lingkaran" },
+      { object: "Jendela", answer: "Persegi", art: "window", label: "Jendela berbentuk persegi" },
+      { object: "Potongan pizza", answer: "Segitiga", art: "pizza", label: "Potongan pizza berbentuk segitiga" },
+      { object: "Pintu", answer: "Persegi Panjang", art: "door", label: "Pintu berbentuk persegi panjang" },
+      { object: "Bola", answer: "Lingkaran", art: "ball", label: "Bola menyerupai lingkaran" },
+      { object: "Atap rumah", answer: "Segitiga", art: "house", label: "Atap rumah berbentuk segitiga" },
+      { object: "Layar televisi", answer: "Persegi Panjang", art: "tv", label: "Layar televisi berbentuk persegi panjang" },
+      { object: "Papan permainan", answer: "Persegi", art: "board", label: "Papan permainan berbentuk persegi" },
+      { object: "Roda sepeda", answer: "Lingkaran", art: "wheel", label: "Roda sepeda berbentuk lingkaran" },
+      { object: "Rambu lalu lintas", answer: "Segitiga", art: "sign", label: "Rambu lalu lintas berbentuk segitiga" }
+    ];
+    const OPTIONS = [
+      ["Lingkaran", "circle"],
+      ["Persegi", "square"],
+      ["Segitiga", "triangle"],
+      ["Persegi Panjang", "rectangle"]
+    ];
 
-  const learnStage = document.getElementById("learn-stage");
-  const quizStage = document.getElementById("quiz-stage");
-  const resultStage = document.getElementById("result-stage");
-  const learnMenuButton = document.getElementById("learn-menu-button");
-  const quizMenuButton = document.getElementById("quiz-menu-button");
-  const cards = [...document.querySelectorAll(".question-card")];
-  const progressBar = document.getElementById("quiz-progress");
-  const progressTrack = progressBar.parentElement;
-  const counter = document.getElementById("question-counter");
-  const nextButton = document.getElementById("next-question");
-  const finishButton = document.getElementById("finish-quiz");
+    let questionIndex = 0;
+    let correctAnswers = 0;
+    let answered = false;
 
-  function focusHeading(id) {
-    const heading = document.getElementById(id);
-    heading.setAttribute("tabindex", "-1");
-    heading.focus({preventScroll:true});
-  }
+    const learnStage = document.getElementById("learn-stage");
+    const quizStage = document.getElementById("quiz-stage");
+    const resultStage = document.getElementById("result-stage");
+    const learnMenuButton = document.getElementById("learn-menu-button");
+    const quizMenuButton = document.getElementById("quiz-menu-button");
+    const holder = document.getElementById("questions-holder");
+    const progressBar = document.getElementById("quiz-progress");
+    const progressTrack = progressBar.parentElement;
+    const counter = document.getElementById("question-counter");
+    const nextButton = document.getElementById("next-question");
+    const finishButton = document.getElementById("finish-quiz");
 
-  function updateMenu(active) {
-    const learning = active === "learn";
-    learnMenuButton.classList.toggle("is-active", learning);
-    quizMenuButton.classList.toggle("is-active", !learning);
-    learnMenuButton.setAttribute("aria-pressed", String(learning));
-    quizMenuButton.setAttribute("aria-pressed", String(!learning));
-  }
-
-  function showLearn(moveFocus = true) {
-    learnStage.classList.remove("hidden");
-    quizStage.classList.add("hidden");
-    resultStage.classList.add("hidden");
-    updateMenu("learn");
-    if (moveFocus) focusHeading("learn-title");
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-
-  function showQuiz(reset = false, moveFocus = true) {
-    if (reset) resetQuizState();
-    learnStage.classList.add("hidden");
-    resultStage.classList.add("hidden");
-    quizStage.classList.remove("hidden");
-    updateMenu("quiz");
-    if (moveFocus) focusHeading("quiz-title");
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-
-  function setActionButton(button, visible) {
-    button.classList.toggle("hidden", !visible);
-    button.classList.toggle("flex", visible);
-  }
-
-  function selectAnswer(card, button) {
-    if (answered || Number(card.dataset.questionIndex) !== questionIndex) return;
-    answered = true;
-    const isCorrect = button.dataset.answer === card.dataset.correct;
-
-    card.querySelectorAll(".quiz-option").forEach(option => {
-      option.disabled = true;
-      if (option.dataset.answer === card.dataset.correct) option.classList.add("is-correct");
-    });
-
-    if (isCorrect) correctAnswers += 1;
-    else button.classList.add("is-wrong");
-
-    const feedback = card.querySelector(".feedback");
-    feedback.classList.remove("hidden");
-    feedback.classList.add(
-      isCorrect ? "border-[#bee8d5]" : "border-[#ffd5d1]",
-      isCorrect ? "bg-[#e9f8f1]" : "bg-[#fff0ee]"
-    );
-    card.querySelector(".correct-message").classList.toggle("hidden", !isCorrect);
-    card.querySelector(".wrong-message").classList.toggle("hidden", isCorrect);
-    setActionButton(nextButton, questionIndex < TOTAL_QUESTIONS - 1);
-    setActionButton(finishButton, questionIndex === TOTAL_QUESTIONS - 1);
-  }
-
-  function displayQuestion(index, moveFocus = true) {
-    questionIndex = index;
-    answered = false;
-    cards.forEach((card, cardIndex) => card.classList.toggle("hidden", cardIndex !== index));
-    counter.textContent = `Soal ${index + 1} dari ${TOTAL_QUESTIONS}`;
-    progressBar.style.width = `${((index + 1) / TOTAL_QUESTIONS) * 100}%`;
-    progressTrack.setAttribute("aria-valuenow", String(index + 1));
-    setActionButton(nextButton, false);
-    setActionButton(finishButton, false);
-
-    if (moveFocus) {
-      const heading = cards[index].querySelector("h2");
-      heading.setAttribute("tabindex", "-1");
-      heading.focus({preventScroll:true});
-      cards[index].scrollIntoView({behavior:"smooth",block:"center"});
+    function artMarkup(type, label) {
+      const common = `role="img" aria-label="${label}"`;
+      const art = {
+        clock: `<div class="relative h-40 w-40 rounded-full border-[14px] border-[#2f80ed] bg-white shadow-lg" ${common}><span class="absolute left-1/2 top-1/2 h-12 w-1 -translate-x-1/2 -translate-y-full rounded-full bg-[#20304a]"></span><span class="absolute left-1/2 top-1/2 h-1 w-10 -translate-y-1/2 rounded-full bg-[#20304a]"></span><span class="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f06c62]"></span></div>`,
+        window: `<div class="grid h-40 w-40 grid-cols-2 gap-1 rounded-xl border-[10px] border-[#8b5e3c] bg-[#d9f2ff] p-2 shadow-lg" ${common}>${"<span class='bg-white/60'></span>".repeat(4)}</div>`,
+        pizza: `<div class="relative h-44 w-48" ${common}><div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[18deg]"><div style="width:0;height:0;border-left:76px solid transparent;border-right:76px solid transparent;border-bottom:140px solid #f5be32"></div><span class="absolute left-5 top-16 h-5 w-5 rounded-full bg-[#f06c62]"></span><span class="absolute right-6 top-20 h-5 w-5 rounded-full bg-[#f06c62]"></span><span class="absolute left-1/2 top-28 h-5 w-5 -translate-x-1/2 rounded-full bg-[#39a878]"></span></div></div>`,
+        door: `<div class="relative h-44 w-32 rounded-t-[4rem] rounded-b-lg border-[10px] border-[#8b5e3c] bg-[#39a878] shadow-lg" ${common}><span class="absolute right-3 top-1/2 h-4 w-4 rounded-full bg-[#f5be32]"></span></div>`,
+        ball: `<div class="relative h-40 w-40 rounded-full bg-[#f06c62] shadow-lg" ${common}><span class="absolute left-1/2 top-0 h-full w-12 -translate-x-1/2 rounded-[50%] border-x-4 border-white/70"></span><span class="absolute left-0 top-1/2 h-12 w-full -translate-y-1/2 rounded-[50%] border-y-4 border-white/70"></span></div>`,
+        house: `<div class="relative h-40 w-44" ${common}><div class="absolute left-1/2 top-0 -translate-x-1/2" style="width:0;height:0;border-left:86px solid transparent;border-right:86px solid transparent;border-bottom:92px solid #f06c62"></div><div class="absolute bottom-0 left-5 h-24 w-36 rounded-b-xl border-4 border-[#2f80ed] bg-white"></div><div class="absolute bottom-0 left-1/2 h-16 w-9 -translate-x-1/2 rounded-t-lg bg-[#f5be32]"></div></div>`,
+        tv: `<div class="relative h-28 w-48 -rotate-3 rounded-xl border-[9px] border-[#20304a] bg-[#bfe7ff] shadow-lg" ${common}><span class="absolute -bottom-7 left-1/2 h-7 w-4 -translate-x-1/2 bg-[#20304a]"></span><span class="absolute -bottom-8 left-1/2 h-3 w-20 -translate-x-1/2 rounded-full bg-[#20304a]"></span></div>`,
+        board: `<div class="grid h-40 w-40 rotate-3 grid-cols-4 grid-rows-4 overflow-hidden rounded-xl border-[8px] border-white shadow-lg" ${common}>${Array.from({length:16}, (_,i) => `<span class="${(Math.floor(i/4)+i)%2===0 ? "bg-[#20304a]" : "bg-[#f5be32]"}"></span>`).join("")}</div>`,
+        wheel: `<div class="relative h-40 w-40 rounded-full border-[12px] border-white bg-[#2f80ed] shadow-lg" ${common}><span class="absolute inset-4 rounded-full border-4 border-[#dcecff]"></span><span class="absolute left-1/2 top-1/2 h-[4px] w-28 -translate-x-1/2 -translate-y-1/2 bg-white"></span><span class="absolute left-1/2 top-1/2 h-28 w-[4px] -translate-x-1/2 -translate-y-1/2 bg-white"></span><span class="absolute left-1/2 top-1/2 h-[4px] w-28 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white"></span><span class="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f5be32]"></span></div>`,
+        sign: `<div class="relative h-48 w-48" ${common}><div class="absolute left-1/2 top-2 -translate-x-1/2" style="width:0;height:0;border-left:86px solid transparent;border-right:86px solid transparent;border-bottom:152px solid #f06c62;filter:drop-shadow(0 12px 8px rgba(32,48,74,.18))"></div><div class="absolute left-1/2 top-[32px] -translate-x-1/2" style="width:0;height:0;border-left:62px solid transparent;border-right:62px solid transparent;border-bottom:110px solid white"></div><span class="absolute left-1/2 top-[78px] h-10 w-3 -translate-x-1/2 rounded-full bg-[#20304a]"></span><span class="absolute left-1/2 top-[124px] h-3 w-3 -translate-x-1/2 rounded-full bg-[#20304a]"></span></div>`
+      };
+      return art[type];
     }
-  }
 
-  function resetQuizState() {
-    questionIndex = 0;
-    correctAnswers = 0;
-    answered = false;
-    cards.forEach((card, index) => {
-      card.classList.toggle("hidden", index !== 0);
-      card.querySelectorAll(".quiz-option").forEach(option => {
-        option.disabled = false;
-        option.classList.remove("is-correct", "is-wrong");
+    function createQuestions() {
+      QUESTIONS.forEach((question, index) => {
+        const article = document.createElement("article");
+        article.className = `question-card soft-shadow ${index ? "hidden " : ""}rounded-[2rem] border border-slate-200 bg-white p-5 sm:p-8`;
+        article.dataset.questionIndex = String(index);
+        article.dataset.correct = question.answer;
+        article.setAttribute("aria-labelledby", `question-${index + 1}-heading`);
+        article.innerHTML = `
+          <div class="grid gap-7 lg:grid-cols-[.72fr_1.28fr]">
+            <div class="question-art grid min-h-56 place-items-center rounded-[1.5rem]">${artMarkup(question.art, question.label)}</div>
+            <div>
+              <p class="font-bold uppercase tracking-widest text-[13px] text-[#2f80ed]">Soal ${index + 1}</p>
+              <h2 id="question-${index + 1}-heading" class="display-font mt-2 text-[28px] font-black">${question.object} ini memiliki bentuk apa?</h2>
+              <div class="mt-5 grid min-w-0 gap-3 sm:grid-cols-2">
+                ${OPTIONS.map(([name, shape]) => `<button type="button" class="quiz-option min-h-16 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left font-extrabold" data-answer="${name}"><span class="option-shape ${shape}" aria-hidden="true"></span><span>${name}</span></button>`).join("")}
+              </div>
+              <div class="feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold" role="status" aria-live="polite">
+                <span class="correct-message hidden text-[#176846]">Benar! ${question.object} itu berbentuk ${question.answer.toLowerCase()}.</span>
+                <span class="wrong-message hidden text-[#993d36]">Belum tepat. ${question.object} itu berbentuk ${question.answer.toLowerCase()}.</span>
+              </div>
+            </div>
+          </div>`;
+        article.querySelectorAll(".quiz-option").forEach(button => {
+          button.addEventListener("click", () => selectAnswer(article, button));
+        });
+        holder.appendChild(article);
       });
+    }
+
+    function cards() {
+      return [...holder.querySelectorAll(".question-card")];
+    }
+
+    function focusHeading(id) {
+      const heading = document.getElementById(id);
+      heading.setAttribute("tabindex", "-1");
+      heading.focus({ preventScroll: true });
+    }
+
+    function updateMenu(active) {
+      const learning = active === "learn";
+      learnMenuButton.classList.toggle("is-active", learning);
+      quizMenuButton.classList.toggle("is-active", !learning);
+      learnMenuButton.setAttribute("aria-pressed", String(learning));
+      quizMenuButton.setAttribute("aria-pressed", String(!learning));
+    }
+
+    function showLearn(moveFocus = true) {
+      learnStage.classList.remove("hidden");
+      quizStage.classList.add("hidden");
+      resultStage.classList.add("hidden");
+      updateMenu("learn");
+      if (moveFocus) focusHeading("learn-title");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showQuiz(reset = false, moveFocus = true) {
+      if (reset) resetQuizState();
+      learnStage.classList.add("hidden");
+      resultStage.classList.add("hidden");
+      quizStage.classList.remove("hidden");
+      updateMenu("quiz");
+      if (moveFocus) focusHeading("quiz-title");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function setActionButton(button, visible) {
+      button.classList.toggle("hidden", !visible);
+      button.classList.toggle("flex", visible);
+    }
+
+    function selectAnswer(card, button) {
+      if (answered || Number(card.dataset.questionIndex) !== questionIndex) return;
+      answered = true;
+      const isCorrect = button.dataset.answer === card.dataset.correct;
+      card.querySelectorAll(".quiz-option").forEach(option => {
+        option.disabled = true;
+        if (option.dataset.answer === card.dataset.correct) option.classList.add("is-correct");
+      });
+      if (isCorrect) correctAnswers += 1;
+      else button.classList.add("is-wrong");
+
       const feedback = card.querySelector(".feedback");
-      feedback.className = "feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold";
-      card.querySelector(".correct-message").classList.add("hidden");
-      card.querySelector(".wrong-message").classList.add("hidden");
+      feedback.classList.remove("hidden");
+      feedback.classList.add(isCorrect ? "border-[#bee8d5]" : "border-[#ffd5d1]", isCorrect ? "bg-[#e9f8f1]" : "bg-[#fff0ee]");
+      card.querySelector(".correct-message").classList.toggle("hidden", !isCorrect);
+      card.querySelector(".wrong-message").classList.toggle("hidden", isCorrect);
+      setActionButton(nextButton, questionIndex < QUESTIONS.length - 1);
+      setActionButton(finishButton, questionIndex === QUESTIONS.length - 1);
+    }
+
+    function displayQuestion(index, moveFocus = true) {
+      questionIndex = index;
+      answered = false;
+      cards().forEach((card, cardIndex) => card.classList.toggle("hidden", cardIndex !== index));
+      counter.textContent = `Soal ${index + 1} dari ${QUESTIONS.length}`;
+      progressBar.style.width = `${((index + 1) / QUESTIONS.length) * 100}%`;
+      progressTrack.setAttribute("aria-valuenow", String(index + 1));
+      setActionButton(nextButton, false);
+      setActionButton(finishButton, false);
+      if (moveFocus) {
+        const heading = cards()[index].querySelector("h2");
+        heading.setAttribute("tabindex", "-1");
+        heading.focus({ preventScroll: true });
+        cards()[index].scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
+    function resetQuizState() {
+      questionIndex = 0;
+      correctAnswers = 0;
+      answered = false;
+      cards().forEach((card, index) => {
+        card.classList.toggle("hidden", index !== 0);
+        card.querySelectorAll(".quiz-option").forEach(option => {
+          option.disabled = false;
+          option.classList.remove("is-correct", "is-wrong");
+        });
+        const feedback = card.querySelector(".feedback");
+        feedback.className = "feedback mt-4 hidden rounded-2xl border px-4 py-3 font-bold";
+        card.querySelector(".correct-message").classList.add("hidden");
+        card.querySelector(".wrong-message").classList.add("hidden");
+      });
+      displayQuestion(0, false);
+    }
+
+    function showResult() {
+      if (!answered) return;
+      const score = Math.round((correctAnswers / QUESTIONS.length) * 100);
+      document.getElementById("result-score").textContent = String(score);
+      document.getElementById("result-summary").textContent = `${correctAnswers} jawaban benar dari ${QUESTIONS.length} soal`;
+      quizStage.classList.add("hidden");
+      learnStage.classList.add("hidden");
+      resultStage.classList.remove("hidden");
+      updateMenu("quiz");
+      focusHeading("result-title");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    createQuestions();
+    learnMenuButton.addEventListener("click", () => showLearn());
+    quizMenuButton.addEventListener("click", () => showQuiz(false));
+    document.getElementById("hero-start-quiz").addEventListener("click", () => showQuiz(true));
+    document.getElementById("start-quiz").addEventListener("click", () => showQuiz(true));
+    nextButton.addEventListener("click", () => {
+      if (answered && questionIndex < QUESTIONS.length - 1) displayQuestion(questionIndex + 1);
     });
-    displayQuestion(0, false);
-  }
+    finishButton.addEventListener("click", showResult);
+    document.getElementById("retry-quiz").addEventListener("click", () => showQuiz(true));
+    document.getElementById("back-to-learn").addEventListener("click", () => showLearn());
 
-  function showResult() {
-    if (!answered) return;
-    const score = Math.round((correctAnswers / TOTAL_QUESTIONS) * 100);
-    document.getElementById("result-score").textContent = String(score);
-    document.getElementById("result-summary").textContent = `${correctAnswers} jawaban benar dari ${TOTAL_QUESTIONS} soal`;
-    quizStage.classList.add("hidden");
-    learnStage.classList.add("hidden");
-    resultStage.classList.remove("hidden");
-    updateMenu("quiz");
-    focusHeading("result-title");
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-
-  cards.forEach(card => {
-    card.querySelectorAll(".quiz-option").forEach(button => {
-      button.addEventListener("click", () => selectAnswer(card, button));
-    });
-  });
-
-  learnMenuButton.addEventListener("click", () => showLearn());
-  quizMenuButton.addEventListener("click", () => showQuiz(false));
-  document.getElementById("hero-start-quiz").addEventListener("click", () => showQuiz(true));
-  document.getElementById("start-quiz").addEventListener("click", () => showQuiz(true));
-  nextButton.addEventListener("click", () => {
-    if (answered && questionIndex < TOTAL_QUESTIONS - 1) displayQuestion(questionIndex + 1);
-  });
-  finishButton.addEventListener("click", showResult);
-  document.getElementById("retry-quiz").addEventListener("click", () => showQuiz(true));
-  document.getElementById("back-to-learn").addEventListener("click", () => showLearn());
-
-  resetQuizState();
-  showLearn(false);
-  lucide.createIcons();
-</script>
+    resetQuizState();
+    showLearn(false);
+    if (window.lucide) lucide.createIcons();
+  </script>
  </body>
 </html>
